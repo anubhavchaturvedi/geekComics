@@ -4,9 +4,9 @@ geekComics
 Get random geeky comic strips from web.
 
 geekComics is a small shell script to fetch random comic strips. As of now it gets its strips from
-  > xkcd
-  > Cyanide & Happiness
-  > PhD Comics
+  <br>- xkcd
+  <br>- Cyanide & Happiness
+  <br>- PhD Comics
   
 You can edit .bashrc to run this script everytime you open a new terminal.
 
