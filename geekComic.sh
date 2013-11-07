@@ -10,7 +10,8 @@ dir=$HOME/Pictures/GEEK_COMIC
     fi
 
 n=$RANDOM
-n=`echo "$n % 3" | bc`
+NUM_SOURCES=4
+n=`echo "$n % $NUM_SOURCES" | bc`
 
 if [ $n -eq 0 ]
 then
@@ -30,7 +31,15 @@ then
         wget -q -O $dir/pageSource 'http://phdcomics.com/comics.php';
         imageLink=$(grep -o 'src=http://www.phdcomics.com/comics/archive/[A-Za-z0-9_]*.gif' $dir/pageSource | grep -P -o 'http://www.phdcomics.com/comics/archive/[A-Za-z0-9_]*.gif');
         imageName=`echo $imageLink | grep -o "[a-zA-Z0-9_]*.gif"`;
+elif [ $n -eq 3 ]
+then
+        # fetch Garfield Comics strip
+        wget -q -O $dir/pageSource 'http://garfield.com/comic/random';
+        imageLink=$(grep -o '/uploads/strips/[0-9-]*.jpg' $dir/pageSource);
+	imageLink='http://garfield.com'$imageLink; 
+        imageName=`echo $imageLink | grep -o "[a-zA-Z0-9_]*.jpg"`;
 fi
+
 
 
 if [ ! -f "$dir/$imageName" ]; then
