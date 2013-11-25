@@ -10,8 +10,19 @@ dir=$HOME/Pictures/GEEK_COMIC
     fi
 
 n=$RANDOM
-NUM_SOURCES=4
+NUM_SOURCES=5
 n=`echo "$n % $NUM_SOURCES" | bc`
+
+if [ "$1" != "" ];
+then
+	if [ $1 -ge 0 ] && [ $1 -lt $NUM_SOURCES ] ;
+	then
+			n=$1;
+	else
+		echo "INVALID USAGE : ./geekComic <comic index>";
+		exit 1;
+	fi
+fi
 
 if [ $n -eq 0 ]
 then
@@ -43,7 +54,16 @@ then
         imageLink=$(grep -o '/uploads/strips/[0-9-]*.jpg' $dir/pageSource);
 	imageLink='http://garfield.com'$imageLink; 
         imageName="Garfield_"`echo $imageLink | grep -o "[a-zA-Z0-9_]*.jpg"`;
+elif [ $n -eq 4 ]
+then
+        # fetch Abstruse Goose Comics strip
+        wget -q -O $dir/pageSource 'http://abstrusegoose.com/pseudorandom.php';
+		page=$(grep -P -o 'http://abstrusegoose.com/[0-9]*' $dir/pageSource);
+		wget -q -O $dir/pageSource "$page";
+        imageLink=$(grep -o 'http://abstrusegoose.com/strips/[a-zA-Z0-9_]*.png' $dir/pageSource);
+        imageName="AbruseGoose_"`echo $imageLink | grep -o "[a-zA-Z0-9_]*.png"`;
 fi
+
 
 
 
