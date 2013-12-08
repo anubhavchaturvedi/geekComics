@@ -11,7 +11,7 @@ geekComics is a small shell script to fetch random comic strips. As of now it ge
   <br>- Abstruse Goose
 
 USAGE :
-	./geekComic.sh [COMIC INDEX FROM 0-9]
+	./geekComic.sh [COMIC INDEX STARTING FROM 0]
  
 You can edit .bashrc to run this script everytime you open a new terminal.
 
